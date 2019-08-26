@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import TypeOfWork from './TypeOfWork';
-import AcademicLevel from './AcademicLevel';
-import PaperFormat from './PaperFormat';
-import TypeOfPaper from './TypeOfPaper';
-import Subject from './Subject';
-import Pages from './Pages';
+import TypeOfWork from './controls/TypeOfWork';
+import AcademicLevel from './controls/AcademicLevel';
+import PaperFormat from './controls/PaperFormat';
+import TypeOfPaper from './controls/TypeOfPaper';
+import Subject from './controls/Subject';
+import Pages from './controls/Pages';
 
 export default class OrderformControls extends Component {
     render() {
