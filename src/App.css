@@ -1,6 +1,10 @@
-.button {
+.pill-button {
     border: 1px solid black;
     background-color: lightblue;
     padding: 0.7rem 1.3rem;
     margin: 0.3rem;
+    cursor: pointer;
+}
+.pill-button.active {
+    background-color: darkseagreen;
 }
