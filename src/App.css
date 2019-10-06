@@ -1,3 +1,8 @@
+.container {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
 .pill-button {
     border: 1px solid black;
     background-color: lightblue;
@@ -5,6 +10,53 @@
     margin: 0.3rem;
     cursor: pointer;
 }
+
 .pill-button.active {
+    background-color: darkseagreen;
+}
+
+.select-container {
+    display: flex;
+    justify-content: space-between;
+}
+.select-container div {
+    flex: 0 0 calc(50% - 10px);
+}
+
+.select-box {
+    position: relative;
+}
+
+.select-placeholder {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 0.8rem;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.dropdown input {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    cursor: pointer;
+}
+
+.list-item {
+    cursor: pointer;
+}
+
+.list-item:hover {
     background-color: darkseagreen;
 }

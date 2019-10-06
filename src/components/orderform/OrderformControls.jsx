@@ -53,6 +53,8 @@ export default class OrderformControls extends Component {
                 name: 'paperType',
                 id: 'paperType',
                 value: '1',
+                searchValue: '',
+                searchDisabled: false,
                 options: [
                     {val: '1', text: 'Essay (Any Type)'},
                     {val: '18', text: 'Admission Essay'},
@@ -76,17 +78,20 @@ export default class OrderformControls extends Component {
                     {val: '21', text: 'Blog Writing'},
                     {val: '22', text: 'Critical Thinking'},
                     {val: '23', text: 'Peer Review'},
-                    {val: '24', text: 'Q&amp;A'},
+                    {val: '24', text: 'Q & A'},
                     {val: '25', text: 'Personal Reflection'},
                     {val: '27', text: 'Capstone Project'},
                     {val: '28', text: 'Creative Writing'}
                 ],
-                label: 'Type of Paper'
+                filteredOptions: '',
+                label: 'Type of Paper',
+                dropdownOpen: false
             },    
             subject: {
                 name: 'subject',
                 id: 'subject',
                 value: '0',
+                searchValue: '',
                 options: [
                     {val: '0', text: 'Please select subject', disabled: true},
                     {val: '01', text: 'Arts & Humanities', optgroup: [
@@ -110,7 +115,9 @@ export default class OrderformControls extends Component {
                         {val: '35', text: 'Journalism, mass media and communication'},
                     ]},
                 ],
-                label: 'Subject'
+                filteredOptions: '',
+                label: 'Subject', 
+                dropdownOpen: false
             },    
         }
     }
@@ -126,23 +133,89 @@ export default class OrderformControls extends Component {
                     value: e.target.value
                 }
             }
-        }))
+        }), () => {
+            
+            if (e.target.name === 'workType' && this.state.pills.workType.value === '3') {
+
+                this.setState(prevState => ({
+                    selects: {
+                        ...prevState.selects,
+                        paperType:{
+                            ...prevState.selects.paperType,
+                            value: '17',
+                            filteredOptions: [{val: '17', text: 'PowerPoint Presentation'}],
+                            searchDisabled: true
+                        }
+                    }
+                }));
+        
+            } else if (e.target.name === 'workType' && this.state.pills.workType.value !== '3') {
+
+                this.setState(prevState => ({
+                    selects: {
+                        ...prevState.selects,
+                        paperType:{
+                            ...prevState.selects.paperType,
+                            value: '1',
+                            filteredOptions: '',
+                            searchDisabled: false
+                        }
+                    }
+                }));
+            }
+        })
     }
 
-    handleSelect = (e) => {
-        e.persist();
+    // handleSelect = (e) => {
+    //     e.persist();
+
+    //     this.setState(prevState => ({
+    //         selects: {
+    //             ...prevState.selects,
+    //             [e.target.name]:{
+    //                 ...prevState.selects[e.target.name],
+    //                 value: e.target.value
+    //             }
+    
+    //         }
+    //     }))
+    // }
+    
+    handleSearch = (name, e) => {
+        e.persist(); 
+
+        let filteredArr = [];
+
+        const options = JSON.parse(JSON.stringify(this.state.selects[name].options));
+
+        options.forEach(item => {
+
+            if (item.optgroup) {
+                const optgroupEl = item;
+                
+                optgroupEl.optgroup = item.optgroup.filter(item => (
+                    item.text.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
+                ));
+
+                optgroupEl.optgroup.length && filteredArr.push(optgroupEl)
+
+            } else {
+                (item.text.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) && filteredArr.push(item)
+            }
+        });
 
         this.setState(prevState => ({
             selects: {
                 ...prevState.selects,
-                [e.target.name]:{
-                    ...prevState.selects[e.target.name],
-                    value: e.target.value
+                [name]:{
+                    ...prevState.selects[name],
+                    searchValue: e.target.value,
+                    filteredOptions: filteredArr
                 }
-    
             }
-        }))
+        }));
     }
+
     handleCustomSlect = (name, e) => {
         e.persist();
 
@@ -151,11 +224,49 @@ export default class OrderformControls extends Component {
                 ...prevState.selects,
                 [name]:{
                     ...prevState.selects[name],
-                    value: e.target.dataset.value
+                    value: e.target.dataset.value,
+                    searchValue: ''
                 }
             }
-        }))
+        }));
 
+        setTimeout(() => {
+            this.hanleDropdownToggle(name);
+        }, 200);
+    }
+
+    hanleDropdownToggle = (name) => {
+        const {selects} = this.state;
+
+        if (name === 'paperType') {
+
+            this.setState(prevState => ({
+                selects: {
+                    ...prevState.selects,
+                    [name]:{
+                        ...prevState.selects[name],
+                        dropdownOpen: !this.state.selects[name].dropdownOpen,
+                        filteredOptions: (selects.paperType.filteredOptions[0] && 
+                                            selects.paperType.filteredOptions[0].val === '17') ?
+                                            selects.paperType.filteredOptions :
+                                            ''
+                    }
+                }
+            }));
+            
+        } else {
+            this.setState(prevState => ({
+                selects: {
+                    ...prevState.selects,
+                    [name]:{
+                        ...prevState.selects[name],
+                        dropdownOpen: !this.state.selects[name].dropdownOpen,
+                        filteredOptions: ''
+                    }
+                }
+            }));
+
+        }
 
     }
 
@@ -172,14 +283,19 @@ export default class OrderformControls extends Component {
                     />
                 ))}
 
-                {Object.values(selects).map((item, index) =>(
-                    <SelectGroup
-                        key={index}
-                        data={item}
-                        handleSelect={this.handleSelect}
-                        handleCustomSlect={this.handleCustomSlect}
-                    />
-                ))}
+                <div className="select-container">
+                    {Object.values(selects).map((item, index) =>(
+                        <SelectGroup
+                            key={index}
+                            data={item}
+                            searchDisabled={item.searchDisabled}
+                            // handleSelect={this.handleSelect}
+                            handleSearch={this.handleSearch}
+                            hanleDropdownToggle={this.hanleDropdownToggle}
+                            handleCustomSlect={this.handleCustomSlect}
+                        />
+                    ))}
+                </div>
 
                 <Subject />
                 <Pages />
