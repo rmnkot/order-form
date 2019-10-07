@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { FaPencilAlt, FaParagraph, FaDesktop } from 'react-icons/fa';
 
-import Subject from './controls/Subject';
-import Pages from './controls/Pages';
+import Range from './utils/Range';
 
 import PillsGroup from './controls/PillsGroup';
 import SelectGroup from './controls/SelectGroup';
@@ -119,6 +118,24 @@ export default class OrderformControls extends Component {
                 label: 'Subject', 
                 dropdownOpen: false
             },    
+        }, 
+        ranges: {
+            pages: {
+                name: 'pages',
+                min: '1',
+                value: '1',
+                max: '100',
+                label: 'Pages',
+                output: true
+            },
+            sources: {
+                name: 'sources',
+                min: '0',
+                value: '0',
+                max: '100',
+                label: 'Sources',
+                output: false
+            }
         }
     }
 
@@ -270,8 +287,32 @@ export default class OrderformControls extends Component {
 
     }
 
+    handleRangeChange = (data, e) => {
+        e.persist();
+
+        let validValue;
+
+        if (+e.target.value < data.min) {
+            validValue = data.min;
+        } else if (+e.target.value > data.max) {
+            validValue = data.max;
+        } else {
+            validValue = e.target.value;
+        }
+
+        this.setState(prevState => ({
+            ranges: {
+                ...prevState.ranges,
+                [data.name]:{
+                    ...prevState.ranges[data.name],
+                    value: validValue
+                }
+            }
+        }));
+    }
+
     render() {
-        const {pills, selects} = this.state;
+        const {pills, selects, ranges } = this.state;
 
         return (
             <div>
@@ -297,8 +338,15 @@ export default class OrderformControls extends Component {
                     ))}
                 </div>
 
-                <Subject />
-                <Pages />
+                <div className="ranges-container">
+                    {Object.values(ranges).map((item, index) => (
+                        <Range 
+                            key={index}
+                            data={item} 
+                            handleRangeChange={this.handleRangeChange} 
+                        />
+                    ))}
+                </div>    
             </div>
         );
     }
