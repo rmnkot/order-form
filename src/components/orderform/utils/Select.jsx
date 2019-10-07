@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Select({data, handleSelect, handleSearch, hanleDropdownToggle, handleCustomSlect, searchDisabled}) {
+export default function Select({data, handleSearch, hanleDropdownToggle, handleCustomSlect, searchDisabled}) {
     
     const filteredOptionList = !data.filteredOptions ? data.options : data.filteredOptions;
 
@@ -18,38 +18,6 @@ export default function Select({data, handleSelect, handleSearch, hanleDropdownT
 
     return (
         <div className="select-box">
-            {/* <select 
-                name={data.name} 
-                id={data.id} 
-                className="original-select" 
-                tabIndex="-1" 
-                aria-hidden="true"
-                value={data.value}
-                onChange={handleSelect}
-            >
-                {data.options.map(item => (
-                    item.optgroup ?
-                        <optgroup label={item.text} key={item.val} >
-                            {item.optgroup.map(item => (
-                                <option 
-                                    key={item.val}
-                                    value={item.val} 
-                                    disabled={item.disabled && 'disabled'} 
-                                >
-                                    {item.text}
-                                </option>                            
-                            ))}
-                        </optgroup> :
-                        <option 
-                            key={item.val}
-                            value={item.val} 
-                            disabled={item.disabled && 'disabled'} 
-                        >
-                            {item.text}
-                        </option>
-                ))}
-            </select> */}
-
             <span 
                 className="select-placeholder"
                 onClick={hanleDropdownToggle.bind(null, data.name)}

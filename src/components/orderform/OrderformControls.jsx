@@ -182,21 +182,6 @@ export default class OrderformControls extends Component {
             }
         })
     }
-
-    // handleSelect = (e) => {
-    //     e.persist();
-
-    //     this.setState(prevState => ({
-    //         selects: {
-    //             ...prevState.selects,
-    //             [e.target.name]:{
-    //                 ...prevState.selects[e.target.name],
-    //                 value: e.target.value
-    //             }
-    
-    //         }
-    //     }))
-    // }
     
     handleSearch = (name, e) => {
         e.persist(); 
@@ -330,7 +315,6 @@ export default class OrderformControls extends Component {
                             key={index}
                             data={item}
                             searchDisabled={item.searchDisabled}
-                            // handleSelect={this.handleSelect}
                             handleSearch={this.handleSearch}
                             hanleDropdownToggle={this.hanleDropdownToggle}
                             handleCustomSlect={this.handleCustomSlect}
