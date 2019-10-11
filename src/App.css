@@ -42,7 +42,8 @@
     left: 0;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	z-index: 10;
 }
 
 .dropdown input {
@@ -120,10 +121,8 @@ input[type=range]::-ms-track {
 	background-clip: padding-box
 }
 input[type=range]::-ms-fill-lower {
-	/* background: #5b9b00; */
 	height: 12px;
 	border: 1px solid #b9d1e1;
-	/* border: 1px solid #3d7b00; */
 	border-radius: 6px;
 	background-clip: padding-box
 }
@@ -149,4 +148,42 @@ input[type=range]::-ms-ticks {
 }
 input[type=range]::-ms-tooltip {
 	display: none
+}
+
+/* ------ spacing ------ */
+
+.switch-label {
+	cursor: pointer;
+}
+
+.lever {
+	content: "";
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 15px;
+    background-color: rgba(0,0,0,.3);
+    border-radius: 15px;
+    transition: background .3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+}
+
+.lever::after {
+	content: "";
+    position: absolute;
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background-color: #f1f1f1;
+    border-radius: 21px;
+    box-shadow: 0 1px 3px 1px rgba(0,0,0,.4);
+    left: -5px;
+    top: -3px;
+    transition: left .3s ease, background .3s ease,box-shadow .1s ease;
+}
+
+input[type=checkbox]:checked+.lever::after {
+	background-color: #00aff0;
+	left: 24px;
 }

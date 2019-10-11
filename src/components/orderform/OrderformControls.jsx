@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { FaPencilAlt, FaParagraph, FaDesktop } from 'react-icons/fa';
 
-import Range from './utils/Range';
+import { handleSpacing, updateLocalStorage } from './functions';
 
 import PillsGroup from './controls/PillsGroup';
 import SelectGroup from './controls/SelectGroup';
+import Range from './utils/Range';
+import Switch from './utils/Switch';
 
 export default class OrderformControls extends Component {
     state = {
@@ -136,7 +138,8 @@ export default class OrderformControls extends Component {
                 label: 'Sources',
                 output: false
             }
-        }
+        },
+        spacing: '2'
     }
 
     handlePillsClick = (e) => {
@@ -296,8 +299,36 @@ export default class OrderformControls extends Component {
         }));
     }
 
+    // handleSpacing = () => {
+        
+    //     this.setState({
+    //         spacing: this.state.spacing === '2' ? '1' : '2'
+    //     })
+    // }
+
+    // updateLocalStorage = () => {
+    //     const {pills, selects, ranges, spacing } = this.state;
+
+    //     const orderSnapshot = {
+    //         workType: pills.workType.value,
+    //         academicLevel: pills.academicLevel.value,
+    //         paperFormat: pills.paperFormat.value,
+    //         paperType: selects.paperType.value,
+    //         subject: selects.subject.value,
+    //         pages: ranges.pages.value,
+    //         sources: ranges.sources.value,
+    //         spacing: spacing
+    //     }
+
+    //     window.localStorage.setItem('orderSnapshot', JSON.stringify(orderSnapshot));
+    // }
+
+    componentDidUpdate = () => {
+        updateLocalStorage.bind(this)();
+    }
+
     render() {
-        const {pills, selects, ranges } = this.state;
+        const {pills, selects, ranges, spacing } = this.state;
 
         return (
             <div>
@@ -330,6 +361,10 @@ export default class OrderformControls extends Component {
                             handleRangeChange={this.handleRangeChange} 
                         />
                     ))}
+                </div>
+                <div className="spacing-container">
+                    <h5>Spacing</h5>
+                    <Switch spacing={spacing} handleSpacing={handleSpacing.bind(this)} />
                 </div>    
             </div>
         );
