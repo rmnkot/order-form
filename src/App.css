@@ -187,3 +187,10 @@ input[type=checkbox]:checked+.lever::after {
 	background-color: #00aff0;
 	left: 24px;
 }
+
+
+/* ------------- input ------------ */
+
+input[type=text] {
+	width: 100%;
+}

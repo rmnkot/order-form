@@ -13,5 +13,5 @@ export default function SelectGroup({data, handleSearch, hanleDropdownToggle, ha
                 handleCustomSlect={handleCustomSlect}
             />
         </div>
-);
+    );
 }
