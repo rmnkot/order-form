@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FaPencilAlt, FaParagraph, FaDesktop } from 'react-icons/fa';
+// import { FaPencilAlt, FaParagraph, FaDesktop } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
 
 import { handleSpacing, updateLocalStorage } from './functions';
 
@@ -16,9 +17,9 @@ export default class OrderformControls extends Component {
                 value: '1',
                 type: 'radio',
                 params: [
-                    { id: '01', icon: <FaPencilAlt />, text: 'WRITING', comment: 'from scratch' },
-                    { id: '02', icon: <FaParagraph />, text: 'EDITING', comment: 'existing paper' },
-                    { id: '03', icon: <FaDesktop />, text: 'SLIDES', comment: 'presentation' }
+                    // { id: '01', icon: <FaPencilAlt />, text: 'WRITING', comment: 'from scratch' },
+                    // { id: '02', icon: <FaParagraph />, text: 'EDITING', comment: 'existing paper' },
+                    // { id: '03', icon: <FaDesktop />, text: 'SLIDES', comment: 'presentation' }
                 ],
                 label: 'Select Type of Work'
             },
@@ -331,6 +332,24 @@ export default class OrderformControls extends Component {
         updateLocalStorage.bind(this)();
     }
 
+    componentDidMount = () => {
+
+        fetch('https://pro-essay-writer.db.rv.ua/api/en/sites/categories/1/orders/work_types')
+        .then(response => response.json())
+        .then(data => {
+
+            this.setState(prevState => ({
+                pills: {
+                    ...prevState.pills,
+                    workType: {
+                        ...prevState.pills.workType,
+                        params: data
+                    }
+                }
+            }));
+        })
+    }
+
     render() {
         const { pills, selects, ranges, spacing } = this.state;
 
@@ -370,6 +389,9 @@ export default class OrderformControls extends Component {
                     <h5>Spacing</h5>
                     <Switch spacing={spacing} handleSpacing={handleSpacing.bind(this)} />
                 </div>
+                <p>
+                    <Link to="/orderform/details">Next ></Link>
+                </p>
             </div>
         );
     }

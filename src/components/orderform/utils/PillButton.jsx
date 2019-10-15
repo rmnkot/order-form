@@ -13,9 +13,10 @@ export default function PillButton({name, value, type, params, index, handlePill
                 onChange={e => handlePillsClick(e)}
                 checked={(+value === index + 1) || false} 
             />
-            {params.icon}
-            {params.text}
-            <span>{params.comment}</span>
+            {/* {params.icon}
+            {params.text} */}
+            {params.name}
+            {/* <span>{params.comment}</span> */}
         </label>
     );
 }

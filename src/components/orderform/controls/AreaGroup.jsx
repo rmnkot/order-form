@@ -2,7 +2,6 @@ import React from 'react';
 import TextArea from '../utils/TextArea';
 
 export default function AreaGroup({ paperDetails, handleFormField }) {
-    console.log('paperDetails', paperDetails);
 
     return (
         <div>

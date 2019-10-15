@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+
 import FieldGroup from './controls/FieldGroup';
 import AreaGroup from './controls/AreaGroup';
 
@@ -62,6 +64,12 @@ export default class OrderformDetails extends Component {
             <div>
                 <FieldGroup title={title} handleFormField={this.handleFormField} />
                 <AreaGroup paperDetails={paperDetails} handleFormField={this.handleFormField} />
+                <p>
+                    <Link to="/orderform/controls">Prev ></Link>
+                    &nbsp;
+                    <Link to="/orderform/checkout">Next ></Link>
+                </p>
+
             </div>
         );
     }
