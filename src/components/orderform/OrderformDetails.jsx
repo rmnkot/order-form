@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FieldGroup from './controls/FieldGroup';
+import AreaGroup from './controls/AreaGroup';
 
 export default class OrderformDetails extends Component {
     state = {
@@ -20,9 +21,15 @@ export default class OrderformDetails extends Component {
                 'World Health Organization Ethical Principles',
                 'Leadership in Nursing',
                 'Will the Humanity Travel to Mars in the next 10 Years?',
-                'The Nature of Moonquakes'            
+                'The Nature of Moonquakes'
             ],
             label: 'Title'
+        },
+        paperDetails: {
+            id: 'paperDetails',
+            name: 'paperDetails',
+            value: '',
+            label: 'Paper Details'
         }
     }
 
@@ -37,12 +44,24 @@ export default class OrderformDetails extends Component {
         }));
     }
 
+    // handleTextArea = (e) => {
+    //     e.persist();
+
+    //     this.setState(prevState => ({
+    //         [e.target.id]: {
+    //             ...prevState[e.target.id],
+    //             value: e.target.value
+    //         }
+    //     }));
+    // }
+
     render() {
-        const {title} = this.state;
+        const { title, paperDetails } = this.state;
 
         return (
             <div>
                 <FieldGroup title={title} handleFormField={this.handleFormField} />
+                <AreaGroup paperDetails={paperDetails} handleFormField={this.handleFormField} />
             </div>
         );
     }

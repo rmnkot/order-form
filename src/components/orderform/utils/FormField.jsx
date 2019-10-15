@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function FormField({title, handleFormField}) {
+const FormField = React.memo(({ title, handleFormField }) => {
 
     const placeholderSetter = (arr) => {
         const randomizer = Math.floor(Math.random() * 12);
@@ -10,12 +10,12 @@ export default function FormField({title, handleFormField}) {
 
     return (
         <div>
-            <input 
-                id={title.id} 
-                name={title.name} 
-                type={title.type} 
-                value={title.value} 
-                maxLength={title.maxlength} 
+            <input
+                id={title.id}
+                name={title.name}
+                type={title.type}
+                value={title.value}
+                maxLength={title.maxlength}
                 disabled={title.disabled}
                 autoComplete='off'
                 placeholder={placeholderSetter(title.placeholder)}
@@ -23,4 +23,6 @@ export default function FormField({title, handleFormField}) {
             />
         </div>
     );
-}
+});
+
+export default FormField;

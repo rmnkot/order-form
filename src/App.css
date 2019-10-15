@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .select-container div {
     flex: 0 0 calc(50% - 10px);
 }
@@ -42,8 +43,8 @@
     left: 0;
     width: 100%;
     background-color: #fff;
-	box-shadow: 0 0 15px rgba(0,0,0,0.2);
-	z-index: 10;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
 
 .dropdown input {
@@ -63,106 +64,115 @@
 }
 
 .ranges-container {
-	display: flex;
-	margin-top: 20px;
-	justify-content: space-between;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
 }
 
 .ranges-container div {
-	flex: 0 0 calc(50% - 10px)
+    flex: 0 0 calc(50% - 10px)
 }
 
 /* ---- range styles ---- */
-
 input[type=range] {
-	-webkit-appearance: none;
-	height: 22px;
-	background: transparent
+    -webkit-appearance: none;
+    height: 22px;
+    background: transparent
 }
+
 input[type=range]:focus {
-	outline: none;
+    outline: none;
 }
+
 input[type=range]::-webkit-slider-runnable-track {
-	-webkit-appearance: none;
-	height: 12px;
-	border: 1px solid #b9d1e1;
-	border-radius: 6px;
-	background-clip: padding-box
+    -webkit-appearance: none;
+    height: 12px;
+    border: 1px solid #b9d1e1;
+    border-radius: 6px;
+    background-clip: padding-box
 }
+
 input[type=range]::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	background: #3d7b00;
-	width: 22px;
-	height: 22px;
-	border-radius: 11px;
-	position: relative;
-	top: -5px
+    -webkit-appearance: none;
+    background: #3d7b00;
+    width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    position: relative;
+    top: -5px
 }
+
 input[type=range]::-moz-range-track {
-	background: #FFF;
-	height: 12px;
-	border: 1px solid #b9d1e1;
-	border-radius: 6px;
-	background-clip: padding-box
+    background: #FFF;
+    height: 12px;
+    border: 1px solid #b9d1e1;
+    border-radius: 6px;
+    background-clip: padding-box
 }
+
 input[type=range]::-moz-range-thumb {
-	background: #3d7b00;
-	width: 22px;
-	height: 22px;
-	border-radius: 11px;
-	border: none
+    background: #3d7b00;
+    width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    border: none
 }
+
 input[type=range]::-ms-track {
-	background: #FFF;
-	height: 12px;
-	border: none;
-	border-radius: 6px;
-	color: transparent;
-	background-clip: padding-box
+    background: #FFF;
+    height: 12px;
+    border: none;
+    border-radius: 6px;
+    color: transparent;
+    background-clip: padding-box
 }
+
 input[type=range]::-ms-fill-lower {
-	height: 12px;
-	border: 1px solid #b9d1e1;
-	border-radius: 6px;
-	background-clip: padding-box
+    height: 12px;
+    border: 1px solid #b9d1e1;
+    border-radius: 6px;
+    background-clip: padding-box
 }
+
 input[type=range]::-ms-fill-upper {
-	background: #FFF;
-	height: 12px;
-	border: 1px solid #b9d1e1;
-	border-radius: 6px;
-	background-clip: padding-box
+    background: #FFF;
+    height: 12px;
+    border: 1px solid #b9d1e1;
+    border-radius: 6px;
+    background-clip: padding-box
 }
+
 input[type=range]::-ms-thumb {
-	background: #3d7b00;
-	width: 22px;
-	height: 22px;
-	border-radius: 11px;
-	z-index: 100;
-	border: none;
-	position: absolute;
-	overflow: visible
+    background: #3d7b00;
+    width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    z-index: 100;
+    border: none;
+    position: absolute;
+    overflow: visible
 }
+
 input[type=range]::-ms-ticks {
-	border: none
+    border: none
 }
+
 input[type=range]::-ms-tooltip {
-	display: none
+    display: none
 }
 
 /* ------ spacing ------ */
-
 .switch-label {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .lever {
-	content: "";
+    content: "";
     display: inline-block;
     position: relative;
     width: 40px;
     height: 15px;
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(0, 0, 0, .3);
     border-radius: 15px;
     transition: background .3s ease;
     vertical-align: middle;
@@ -170,27 +180,26 @@ input[type=range]::-ms-tooltip {
 }
 
 .lever::after {
-	content: "";
+    content: "";
     position: absolute;
     display: inline-block;
     width: 21px;
     height: 21px;
     background-color: #f1f1f1;
     border-radius: 21px;
-    box-shadow: 0 1px 3px 1px rgba(0,0,0,.4);
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .4);
     left: -5px;
     top: -3px;
-    transition: left .3s ease, background .3s ease,box-shadow .1s ease;
+    transition: left .3s ease, background .3s ease, box-shadow .1s ease;
 }
 
 input[type=checkbox]:checked+.lever::after {
-	background-color: #00aff0;
-	left: 24px;
+    background-color: #00aff0;
+    left: 24px;
 }
 
-
 /* ------------- input ------------ */
-
-input[type=text] {
-	width: 100%;
+input[type=text],
+textarea {
+    width: 100%;
 }
