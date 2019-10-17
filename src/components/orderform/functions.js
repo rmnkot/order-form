@@ -7,12 +7,12 @@ export function handleSpacing() {
 
 
 export function updateLocalStorage() {
-    const {pills, selects, ranges, spacing } = this.state;
+    const { workType, selects, ranges, spacing } = this.state;
     
     const orderSnapshot = {
-        workType: pills.workType.value,
-        academicLevel: pills.academicLevel.value,
-        paperFormat: pills.paperFormat.value,
+        workType: workType.value,
+        academicLevel: selects.academicLevel.value,
+        paperFormat: selects.paperFormat.value,
         paperType: selects.paperType.value,
         subject: selects.subject.value,
         pages: ranges.pages.value,

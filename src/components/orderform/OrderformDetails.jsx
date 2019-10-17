@@ -65,9 +65,9 @@ export default class OrderformDetails extends Component {
                 <FieldGroup title={title} handleFormField={this.handleFormField} />
                 <AreaGroup paperDetails={paperDetails} handleFormField={this.handleFormField} />
                 <p>
-                    <Link to="/orderform/controls">Prev ></Link>
+                    <Link to="/orderform/controls">&lt; Prev </Link>
                     &nbsp;
-                    <Link to="/orderform/checkout">Next ></Link>
+                    <Link to="/orderform/checkout">Next &gt;</Link>
                 </p>
 
             </div>

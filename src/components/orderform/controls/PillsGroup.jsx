@@ -6,14 +6,12 @@ export default function PillsGroup({ data, handlePillsClick }) {
         <div>
             <h5>{data.label}</h5>
             <div>
-                {data.params.map((item, index) => (
+                {data.params.map((item) => (
                     <PillButton
                         key={item.id}
                         name={data.name}
                         value={data.value}
-                        type={data.type}
                         params={item}
-                        index={index}
                         handlePillsClick={handlePillsClick}
                     />
                 ))}

@@ -22,9 +22,9 @@ export default function Select({data, handleSearch, hanleDropdownToggle, handleC
                 className="select-placeholder"
                 onClick={hanleDropdownToggle.bind(null, data.name)}
             >
-                {(setArr().find(item => item.val === data.value) && 
-                    setArr().find(item => item.val === data.value).text) || 
-                        data.options[0].text}
+                {(setArr().find(item => item.id === +data.value) && 
+                    setArr().find(item => item.id === +data.value).name) || 
+                        (data.options[0] && data.options[0].name)}
                 &nbsp;▼
             </span>
             
@@ -43,30 +43,30 @@ export default function Select({data, handleSearch, hanleDropdownToggle, handleC
                     <ul className="custom-select">
                         {filteredOptionList.map(item => (
                             item.optgroup ?
-                                <li key={item.val}>
-                                    <span>{item.text}</span>
+                                <li key={item.id}>
+                                    <span>{item.name}</span>
                                     <ul>
                                         {item.optgroup.map(item => (
                                             !item.disabled && 
                                                 <li 
-                                                    key={item.val} 
-                                                    data-value={item.val}
+                                                    key={item.id} 
+                                                    data-value={item.id}
                                                     className="list-item"
                                                     onClick={handleCustomSlect.bind(null, data.name)}
                                                 >
-                                                    {item.text}
+                                                    {item.name}
                                                 </li> 
                                         ))}
                                     </ul>
                                 </li> :
                                 !item.disabled &&
                                     <li 
-                                        key={item.val}
-                                        data-value={item.val}
+                                        key={item.id}
+                                        data-value={item.id}
                                         className="list-item"
                                         onClick={handleCustomSlect.bind(null, data.name)}
                                     >
-                                        {item.text}
+                                        {item.name}
                                     </li>
                         ))}
                     </ul>

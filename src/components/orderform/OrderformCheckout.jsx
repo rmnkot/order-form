@@ -9,7 +9,7 @@ export default class OrderformCheckout extends Component {
                 <h1>Checkout</h1>
 
                 <p>
-                    <Link to="/orderform/details">Prev ></Link>
+                    <Link to="/orderform/details">&lt; Prev</Link>
                 </p>
             </div>
         )

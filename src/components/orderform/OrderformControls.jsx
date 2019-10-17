@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import { FaPencilAlt, FaParagraph, FaDesktop } from 'react-icons/fa';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
+import {store} from './store/store';
 import { handleSpacing, updateLocalStorage } from './functions';
 
 import PillsGroup from './controls/PillsGroup';
@@ -9,158 +10,20 @@ import SelectGroup from './controls/SelectGroup';
 import Range from './utils/Range';
 import Switch from './utils/Switch';
 
-export default class OrderformControls extends Component {
-    state = {
-        pills: {
-            workType: {
-                name: 'workType',
-                value: '1',
-                type: 'radio',
-                params: [
-                    // { id: '01', icon: <FaPencilAlt />, text: 'WRITING', comment: 'from scratch' },
-                    // { id: '02', icon: <FaParagraph />, text: 'EDITING', comment: 'existing paper' },
-                    // { id: '03', icon: <FaDesktop />, text: 'SLIDES', comment: 'presentation' }
-                ],
-                label: 'Select Type of Work'
-            },
-            academicLevel: {
-                name: 'academicLevel',
-                value: '1',
-                type: 'radio',
-                params: [
-                    { id: '010', text: 'High school' },
-                    { id: '020', text: 'College' },
-                    { id: '030', text: 'University' },
-                    { id: '040', text: 'Master`s' },
-                    { id: '050', text: 'Ph.D.' }
-                ],
-                label: 'Academic Level'
-            },
-            paperFormat: {
-                name: 'paperFormat',
-                value: '1',
-                type: 'radio',
-                params: [
-                    { id: '10', text: 'MLA' },
-                    { id: '20', text: 'APA' },
-                    { id: '30', text: 'Chicago' },
-                    { id: '40', text: 'Harvard' },
-                    { id: '50', text: 'Other' }
-                ],
-                label: 'Paper Format'
-            }
-        },
-        selects: {
-            paperType: {
-                name: 'paperType',
-                id: 'paperType',
-                value: '1',
-                searchValue: '',
-                searchDisabled: false,
-                options: [
-                    { val: '1', text: 'Essay (Any Type)' },
-                    { val: '18', text: 'Admission Essay' },
-                    { val: '20', text: 'Scholarship Essay' },
-                    { val: '19', text: 'Personal Statement' },
-                    { val: '4', text: 'Research Paper' },
-                    { val: '2', text: 'Case Study' },
-                    { val: '3', text: 'Term Paper' },
-                    { val: '7', text: 'Coursework' },
-                    { val: '5', text: 'Book Review' },
-                    { val: '6', text: 'Movie Review' },
-                    { val: '8', text: 'Annotated Bibliography' },
-                    { val: '9', text: 'Article' },
-                    { val: '10', text: 'Assignment' },
-                    { val: '11', text: 'Dissertation' },
-                    { val: '12', text: 'Lab Report' },
-                    { val: '13', text: 'Math Problem' },
-                    { val: '15', text: 'Speech' },
-                    { val: '16', text: 'Statistics Report' },
-                    { val: '17', text: 'PowerPoint Presentation', disabled: true },
-                    { val: '21', text: 'Blog Writing' },
-                    { val: '22', text: 'Critical Thinking' },
-                    { val: '23', text: 'Peer Review' },
-                    { val: '24', text: 'Q&A' },
-                    { val: '25', text: 'Personal Reflection' },
-                    { val: '27', text: 'Capstone Project' },
-                    { val: '28', text: 'Creative Writing' }
-                ],
-                filteredOptions: '',
-                label: 'Type of Paper',
-                dropdownOpen: false
-            },
-            subject: {
-                name: 'subject',
-                id: 'subject',
-                value: '0',
-                searchValue: '',
-                options: [
-                    { val: '0', text: 'Please select subject', disabled: true },
-                    {
-                        val: '01', text: 'Arts & Humanities', optgroup: [
-                            { val: '4', text: 'Culture' },
-                            { val: '6', text: 'Education' },
-                            { val: '7', text: 'English' },
-                            { val: '17', text: 'Linguistics' },
-                            { val: '18', text: 'Literature' },
-                            { val: '29', text: 'Ethics' },
-                            { val: '61', text: 'Art' }
-                        ]
-                    },
-                    {
-                        val: '02', text: 'Social Sciences', optgroup: [
-                            { val: '12', text: 'History and Anthropology' },
-                            { val: '14', text: 'International Relations' },
-                            { val: '21', text: 'Philosophy' },
-                            { val: '23', text: 'Political Science' },
-                            { val: '24', text: 'Psychology' },
-                            { val: '25', text: 'Sociology' },
-                            { val: '31', text: 'Religion and Theology' },
-                            { val: '33', text: 'Gender & Sexual Studies' },
-                            { val: '35', text: 'Journalism, mass media and communication' },
-                        ]
-                    },
-                ],
-                filteredOptions: '',
-                label: 'Subject',
-                dropdownOpen: false
-            },
-        },
-        ranges: {
-            pages: {
-                name: 'pages',
-                min: '1',
-                value: '1',
-                max: '100',
-                label: 'Pages',
-                output: true
-            },
-            sources: {
-                name: 'sources',
-                min: '0',
-                value: '0',
-                max: '100',
-                label: 'Sources',
-                output: false
-            }
-        },
-        spacing: '2'
-    }
+class OrderformControls extends Component {
+    state = store;
 
     handlePillsClick = (e) => {
         e.persist();
 
         this.setState(prevState => ({
-            pills: {
-                ...prevState.pills,
-                [e.target.name]: {
-                    ...prevState.pills[e.target.name],
-                    value: e.target.value
-                }
+            workType: {
+                ...prevState.workType,
+                value: e.target.value
             }
         }), () => {
 
-            if (e.target.name === 'workType' && this.state.pills.workType.value === '3') {
+            if (e.target.name === 'workType' && this.state.workType.value === '3') {
 
                 this.setState(prevState => ({
                     selects: {
@@ -168,13 +31,13 @@ export default class OrderformControls extends Component {
                         paperType: {
                             ...prevState.selects.paperType,
                             value: '17',
-                            filteredOptions: [{ val: '17', text: 'PowerPoint Presentation' }],
+                            filteredOptions: [{ id: 17, name: 'PowerPoint Presentation' }],
                             searchDisabled: true
                         }
                     }
                 }));
 
-            } else if (e.target.name === 'workType' && this.state.pills.workType.value !== '3') {
+            } else if (e.target.name === 'workType' && this.state.workType.value !== '3') {
 
                 this.setState(prevState => ({
                     selects: {
@@ -204,13 +67,13 @@ export default class OrderformControls extends Component {
                 const optgroupEl = item;
 
                 optgroupEl.optgroup = item.optgroup.filter(item => (
-                    item.text.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
+                    item.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
                 ));
 
                 optgroupEl.optgroup.length && filteredArr.push(optgroupEl)
 
             } else {
-                (item.text.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) && filteredArr.push(item)
+                (item.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) && filteredArr.push(item)
             }
         });
 
@@ -257,7 +120,7 @@ export default class OrderformControls extends Component {
                         ...prevState.selects[name],
                         dropdownOpen: !this.state.selects[name].dropdownOpen,
                         filteredOptions: (selects.paperType.filteredOptions[0] &&
-                            selects.paperType.filteredOptions[0].val === '17') ?
+                            selects.paperType.filteredOptions[0].id === 17) ?
                             selects.paperType.filteredOptions :
                             ''
                     }
@@ -304,64 +167,43 @@ export default class OrderformControls extends Component {
         }));
     }
 
-    // handleSpacing = () => {
+    /*handleSpacing = () => {
 
-    //     this.setState({
-    //         spacing: this.state.spacing === '2' ? '1' : '2'
-    //     })
-    // }
+        this.setState({
+            spacing: this.state.spacing === '2' ? '1' : '2'
+        })
+    }
 
-    // updateLocalStorage = () => {
-    //     const {pills, selects, ranges, spacing } = this.state;
+    updateLocalStorage = () => {
+        const {pills, selects, ranges, spacing } = this.state;
 
-    //     const orderSnapshot = {
-    //         workType: pills.workType.value,
-    //         academicLevel: pills.academicLevel.value,
-    //         paperFormat: pills.paperFormat.value,
-    //         paperType: selects.paperType.value,
-    //         subject: selects.subject.value,
-    //         pages: ranges.pages.value,
-    //         sources: ranges.sources.value,
-    //         spacing: spacing
-    //     }
+        const orderSnapshot = {
+            workType: pills.workType.value,
+            academicLevel: pills.academicLevel.value,
+            paperFormat: pills.paperFormat.value,
+            paperType: selects.paperType.value,
+            subject: selects.subject.value,
+            pages: ranges.pages.value,
+            sources: ranges.sources.value,
+            spacing: spacing
+        }
 
-    //     window.localStorage.setItem('orderSnapshot', JSON.stringify(orderSnapshot));
-    // }
+        window.localStorage.setItem('orderSnapshot', JSON.stringify(orderSnapshot));
+    }*/
 
     componentDidUpdate = () => {
         updateLocalStorage.bind(this)();
     }
 
-    componentDidMount = () => {
-
-        fetch('https://pro-essay-writer.db.rv.ua/api/en/sites/categories/1/orders/work_types')
-        .then(response => response.json())
-        .then(data => {
-
-            this.setState(prevState => ({
-                pills: {
-                    ...prevState.pills,
-                    workType: {
-                        ...prevState.pills.workType,
-                        params: data
-                    }
-                }
-            }));
-        })
-    }
 
     render() {
-        const { pills, selects, ranges, spacing } = this.state;
+        const { workType, selects, ranges, spacing } = this.state;
+        const {match} = this.props;
+        
 
         return (
             <div>
-                {Object.values(pills).map((item, index) => (
-                    <PillsGroup
-                        key={index}
-                        data={item}
-                        handlePillsClick={this.handlePillsClick}
-                    />
-                ))}
+                <PillsGroup data={workType} handlePillsClick={this.handlePillsClick} />
 
                 <div className="select-container">
                     {Object.values(selects).map((item, index) => (
@@ -389,10 +231,12 @@ export default class OrderformControls extends Component {
                     <h5>Spacing</h5>
                     <Switch spacing={spacing} handleSpacing={handleSpacing.bind(this)} />
                 </div>
-                <p>
-                    <Link to="/orderform/details">Next ></Link>
-                </p>
+                {(match.path === '/orderform') || <p>
+                    <Link to="/orderform/details">Next &gt;</Link>
+                </p>}
             </div>
         );
     }
 }
+
+export default withRouter(OrderformControls);
