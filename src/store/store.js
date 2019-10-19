@@ -90,29 +90,29 @@ export const store = {
             value: '0',
             searchValue: '',
             options: [
-                { id: '0', name: 'Please select subject', disabled: true },
+                { id: 0, name: 'Please select subject', disabled: true },
                 {
                     id: '01', name: 'Arts & Humanities', optgroup: [
-                        { id: '4', name: 'Culture' },
-                        { id: '6', name: 'Education' },
-                        { id: '7', name: 'English' },
-                        { id: '17', name: 'Linguistics' },
-                        { id: '18', name: 'Literature' },
-                        { id: '29', name: 'Ethics' },
-                        { id: '61', name: 'Art' }
+                        { id: 4, name: 'Culture' },
+                        { id: 6, name: 'Education' },
+                        { id: 7, name: 'English' },
+                        { id: 17, name: 'Linguistics' },
+                        { id: 18, name: 'Literature' },
+                        { id: 29, name: 'Ethics' },
+                        { id: 61, name: 'Art' }
                     ]
                 },
                 {
-                    id: '02', name: 'Social Sciences', optgroup: [
-                        { id: '12', name: 'History and Anthropology' },
-                        { id: '14', name: 'International Relations' },
-                        { id: '21', name: 'Philosophy' },
-                        { id: '23', name: 'Political Science' },
-                        { id: '24', name: 'Psychology' },
-                        { id: '25', name: 'Sociology' },
-                        { id: '31', name: 'Religion and Theology' },
-                        { id: '33', name: 'Gender & Sexual Studies' },
-                        { id: '35', name: 'Journalism, mass media and communication' },
+                    id: 2, name: 'Social Sciences', optgroup: [
+                        { id: 12, name: 'History and Anthropology' },
+                        { id: 14, name: 'International Relations' },
+                        { id: 21, name: 'Philosophy' },
+                        { id: 23, name: 'Political Science' },
+                        { id: 24, name: 'Psychology' },
+                        { id: 25, name: 'Sociology' },
+                        { id: 31, name: 'Religion and Theology' },
+                        { id: 33, name: 'Gender & Sexual Studies' },
+                        { id: 35, name: 'Journalism, mass media and communication' },
                     ]
                 },
             ],
@@ -139,5 +139,33 @@ export const store = {
             output: false
         }
     },
-    spacing: '2'
+    spacing: '2',
+    title: {
+        id: 'title',
+        name: 'title',
+        type: 'text',
+        maxlength: '250',
+        value: '',
+        placeholder: [
+            'Will the Implementation of Blockchain Technology Change the HR?',
+            'Internal Recruiting: Advantages and Legal Issues That may Arise',
+            'How Does the Effective Management at the Multinational Company Look Like?',
+            'Should a Manager Always Be a Leader?',
+            'Binomial Denominators',
+            'How Do Developed Countries Benefit from Globalization?',
+            'How Can Governments Control the Inflation Rate?',
+            'World Health Organization Ethical Principles',
+            'Leadership in Nursing',
+            'Will the Humanity Travel to Mars in the next 10 Years?',
+            'The Nature of Moonquakes'
+        ],
+        label: 'Title'
+    },
+    paperDetails: {
+        id: 'paperDetails',
+        name: 'paperDetails',
+        value: '',
+        label: 'Paper Details'
+    }
+
 }

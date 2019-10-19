@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 
 
-export default class OrderformCheckout extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Checkout</h1>
+export default function OrderformCheckout() {
 
-                <p>
-                    <Link to="/orderform/details">&lt; Prev</Link>
-                </p>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <h1>Checkout</h1>
+
+            <p>
+                <Link to="/orderform/details">&lt; Prev</Link>
+            </p>
+        </div>
+    );
 }

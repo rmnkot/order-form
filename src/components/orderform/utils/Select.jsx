@@ -70,7 +70,8 @@ export default function Select({data, handleSearch, hanleDropdownToggle, handleC
                                     </li>
                         ))}
                     </ul>
-                </div>}
+                </div>
+            }
         </div>
     );
 }

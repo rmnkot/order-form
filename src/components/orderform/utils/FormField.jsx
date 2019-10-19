@@ -1,5 +1,9 @@
 import React from 'react';
 
+const propsAreEqual = (prevProps, nextProps) => (
+    prevProps.title === nextProps.title
+)
+
 const FormField = React.memo(({ title, handleFormField }) => {
 
     const placeholderSetter = (arr) => {
@@ -7,7 +11,7 @@ const FormField = React.memo(({ title, handleFormField }) => {
 
         return arr[randomizer];
     }
-
+    
     return (
         <div>
             <input
@@ -23,6 +27,6 @@ const FormField = React.memo(({ title, handleFormField }) => {
             />
         </div>
     );
-});
+}, propsAreEqual);
 
 export default FormField;
