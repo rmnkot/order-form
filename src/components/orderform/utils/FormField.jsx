@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const propsAreEqual = (prevProps, nextProps) => (
     prevProps.title === nextProps.title
@@ -28,5 +30,17 @@ const FormField = React.memo(({ title, handleFormField }) => {
         </div>
     );
 }, propsAreEqual);
+
+FormField.propTypes = {
+    title: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        maxlength: PropTypes.string.isRequired,
+        disabled: PropTypes.bool,
+        placeholder: PropTypes.arrayOf(PropTypes.string)
+    }),
+    handleFormField: PropTypes.func
+}
 
 export default FormField;
