@@ -1,6 +1,18 @@
 .container {
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 1100px;
+}
+
+.inner-wrapper {
+  display: flex;
+}
+form {
+  flex-grow: 1;
+}
+.sidebar {
+  min-width: 200px;
+  border: 1px solid black;
+  margin-left: 15px;
 }
 
 .pill-button {

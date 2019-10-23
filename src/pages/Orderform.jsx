@@ -94,69 +94,89 @@ export default class Orderform extends Component {
 
     render() {
         const {isLoading, workType, selects, ranges, spacing, title, paperDetails } =this.state;
+        const multiplier = function(workType) {
+            switch (workType) {
+                case '1':
+                    return 1.3
+                case '2':
+                    return 0.9
+                case '3':
+                    return 0.6
+                default:
+                    break;
+            }
+        }
 
         return (
             <BrowserRouter>
                 <h1>Make a new order</h1>
-                <form>
-                    <Switch>
-                        <Route exact path="/" render={() => <Redirect to="/orderform/controls" />} />
-                        <Route 
-                            exact path="/orderform/controls" 
-                            render={() => (
-                                isLoading ? <Loading /> : 
-                                    <OrderformControls 
-                                        workType={workType}
-                                        selects={selects}
-                                        ranges={ranges}
-                                        spacing={spacing}
-                                        handlePillsClick={handlePillsClick.bind(this)}
-                                        handleSearch={handleSearch.bind(this)}
-                                        handleCustomSlect={handleCustomSlect.bind(this)}
-                                        hanleDropdownToggle={hanleDropdownToggle.bind(this)}
-                                        handleRangeChange={handleRangeChange.bind(this)}
-                                        handleSpacing={handleSpacing.bind(this)}
-                                    />
-                            )}
-                        />
-                        <Route 
-                            exact path="/orderform/details" 
-                            render={() => (
-                                <OrderformDetails
-                                    title={title}
-                                    paperDetails={paperDetails}
-                                    handleFormField={handleFormField.bind(this)}
-                                />
-                            )}
-                        />
-                        <Route exact path="/orderform/checkout" component={OrderformCheckout} />
-                        <Route exact path="/orderform">
-                            {isLoading ? <Loading /> : 
-                                <>
-                                    <OrderformControls 
-                                        workType={workType}
-                                        selects={selects}
-                                        ranges={ranges}
-                                        spacing={spacing}
-                                        handlePillsClick={handlePillsClick.bind(this)}
-                                        handleSearch={handleSearch.bind(this)}
-                                        handleCustomSlect={handleCustomSlect.bind(this)}
-                                        hanleDropdownToggle={hanleDropdownToggle.bind(this)}
-                                        handleRangeChange={handleRangeChange.bind(this)}
-                                        handleSpacing={handleSpacing.bind(this)}
-                                    />
-                                    <OrderformDetails 
+                <div className="inner-wrapper">
+                    <form>
+                        <Switch>
+                            <Route exact path="/" render={() => <Redirect to="/orderform/controls" />} />
+                            <Route 
+                                exact path="/orderform/controls" 
+                                render={() => (
+                                    isLoading ? <Loading /> : 
+                                        <OrderformControls 
+                                            workType={workType}
+                                            selects={selects}
+                                            ranges={ranges}
+                                            spacing={spacing}
+                                            handlePillsClick={handlePillsClick.bind(this)}
+                                            handleSearch={handleSearch.bind(this)}
+                                            handleCustomSlect={handleCustomSlect.bind(this)}
+                                            hanleDropdownToggle={hanleDropdownToggle.bind(this)}
+                                            handleRangeChange={handleRangeChange.bind(this)}
+                                            handleSpacing={handleSpacing.bind(this)}
+                                        />
+                                )}
+                            />
+                            <Route 
+                                exact path="/orderform/details" 
+                                render={() => (
+                                    <OrderformDetails
                                         title={title}
                                         paperDetails={paperDetails}
                                         handleFormField={handleFormField.bind(this)}
                                     />
-                                    <OrderformCheckout />
-                                </>
-                            }
-                        </Route>
-                        <Route component={Page404} />
-                    </Switch>
-                </form>
+                                )}
+                            />
+                            <Route exact path="/orderform/checkout" component={OrderformCheckout} />
+                            <Route exact path="/orderform">
+                                {isLoading ? <Loading /> : 
+                                    <>
+                                        <OrderformControls 
+                                            workType={workType}
+                                            selects={selects}
+                                            ranges={ranges}
+                                            spacing={spacing}
+                                            handlePillsClick={handlePillsClick.bind(this)}
+                                            handleSearch={handleSearch.bind(this)}
+                                            handleCustomSlect={handleCustomSlect.bind(this)}
+                                            hanleDropdownToggle={hanleDropdownToggle.bind(this)}
+                                            handleRangeChange={handleRangeChange.bind(this)}
+                                            handleSpacing={handleSpacing.bind(this)}
+                                        />
+                                        <OrderformDetails 
+                                            title={title}
+                                            paperDetails={paperDetails}
+                                            handleFormField={handleFormField.bind(this)}
+                                        />
+                                        <OrderformCheckout />
+                                    </>
+                                }
+                            </Route>
+                            <Route component={Page404} />
+                        </Switch>
+                    </form>
+                    <aside className="sidebar">
+                        <div className="summary">Summary</div>
+                        <div className="total">
+                            Total: ${(ranges.pages.value * multiplier(workType.value)).toFixed(2)}
+                        </div>
+                    </aside>
+                </div>
             </BrowserRouter>
         );
     }
