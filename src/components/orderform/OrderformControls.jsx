@@ -11,7 +11,7 @@ function OrderformControls({ workType, selects, ranges, spacing, handlePillsClic
 
     return (
         <div>
-            <PillsGroup data={workType} handlePillsClick={handlePillsClick} />
+            <PillsGroup handlePillsClick={handlePillsClick} />
 
             <div className="select-container">
                 {Object.values(selects).map((item, index) => (

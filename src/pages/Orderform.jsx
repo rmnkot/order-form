@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import { store } from '../store/store';
 import { 
@@ -18,28 +19,17 @@ import OrderformDetails from '../components/orderform/OrderformDetails';
 import OrderformCheckout from '../components/orderform/OrderformCheckout';
 import Loading from '../components/orderform/utils/Loading';
 import Page404 from './Page404';
+import fetchWorkType from './../redux/actions/workTypeAction';
 
-export default class Orderform extends Component {
+class Orderform extends Component {
     state = store;
+
 
     componentDidMount = () => {
         const {siteCategoryId} = this.state;
 
         const fetchWorkTypes = new Promise((resolve) => {
-
-            fetch(`https://pro-essay-writer.db.rv.ua/api/en/sites/categories/${siteCategoryId}/orders/work_types`)
-            .then(response => response.json())
-            .then(data => {
-
-                this.setState(prevState => ({
-                    workType: {
-                        ...prevState.workType,
-                        params: data
-                    }
-                }));
-
-                resolve();
-            });
+            this.props.fetchWorkType(resolve);
         });
 
         const fetchAcademicLevel = new Promise((resolve) => {
@@ -181,3 +171,7 @@ export default class Orderform extends Component {
         );
     }
 }
+
+const mapDispatchToProps = {fetchWorkType};
+
+export default connect(null, mapDispatchToProps)(Orderform);
