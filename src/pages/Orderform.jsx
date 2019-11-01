@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import { store } from '../store/store';
 import { 
-    handlePillsClick, 
+    // handlePillsClick, 
     handleSearch, 
     handleCustomSlect, 
     hanleDropdownToggle, 
@@ -19,60 +19,28 @@ import OrderformDetails from '../components/orderform/OrderformDetails';
 import OrderformCheckout from '../components/orderform/OrderformCheckout';
 import Loading from '../components/orderform/utils/Loading';
 import Page404 from './Page404';
-import fetchWorkType from './../redux/actions/workTypeAction';
+import {fetchWorkType} from './../redux/actions/workTypeAction';
+import { fetchLevel } from './../redux/actions/levelAction';
+import { fetchPaperFormat } from './../redux/actions/paperFormatAction';
 
 class Orderform extends Component {
     state = store;
 
 
     componentDidMount = () => {
-        const {siteCategoryId} = this.state;
-
         const fetchWorkTypes = new Promise((resolve) => {
             this.props.fetchWorkType(resolve);
         });
 
-        const fetchAcademicLevel = new Promise((resolve) => {
-
-            fetch(`https://pro-essay-writer.db.rv.ua/api/en/orders/academic_levels`)
-            .then(response => response.json())
-            .then(data => {
-
-                this.setState(prevState => ({
-                    selects: {
-                        ...prevState.selects,
-                        academicLevel: {
-                            ...prevState.selects.academicLevel,
-                            options: data
-                        }
-                    }
-                }));
-
-                resolve();
-            });
+        const fetchLevels = new Promise((resolve) => {
+            this.props.fetchLevel(resolve);
         });
 
         const fetchPaperFormats = new Promise((resolve) => {
-
-            fetch(`https://pro-essay-writer.db.rv.ua/api/en/orders/paper_formats`)
-            .then(response => response.json())
-            .then(data => {
-
-                this.setState(prevState => ({
-                    selects: {
-                        ...prevState.selects,
-                        paperFormat: {
-                            ...prevState.selects.paperFormat,
-                            options: data
-                        }
-                    }
-                }));
-
-                resolve();
-            });
+            this.props.fetchPaperFormat(resolve);
         });
 
-        Promise.all([fetchWorkTypes, fetchAcademicLevel, fetchPaperFormats])
+        Promise.all([fetchWorkTypes, fetchLevels, fetchPaperFormats])
             .then(() => {
                 this.setState({isLoading: false});
             })
@@ -113,7 +81,6 @@ class Orderform extends Component {
                                             selects={selects}
                                             ranges={ranges}
                                             spacing={spacing}
-                                            handlePillsClick={handlePillsClick.bind(this)}
                                             handleSearch={handleSearch.bind(this)}
                                             handleCustomSlect={handleCustomSlect.bind(this)}
                                             hanleDropdownToggle={hanleDropdownToggle.bind(this)}
@@ -141,7 +108,6 @@ class Orderform extends Component {
                                             selects={selects}
                                             ranges={ranges}
                                             spacing={spacing}
-                                            handlePillsClick={handlePillsClick.bind(this)}
                                             handleSearch={handleSearch.bind(this)}
                                             handleCustomSlect={handleCustomSlect.bind(this)}
                                             hanleDropdownToggle={hanleDropdownToggle.bind(this)}
@@ -172,6 +138,10 @@ class Orderform extends Component {
     }
 }
 
-const mapDispatchToProps = {fetchWorkType};
+const mapDispatchToProps = {
+    fetchWorkType, 
+    fetchLevel,
+    fetchPaperFormat
+};
 
 export default connect(null, mapDispatchToProps)(Orderform);

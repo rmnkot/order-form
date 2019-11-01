@@ -1,10 +1,13 @@
-import workTypeReducer from './workTypeReducer';
-import levelReducer from './levelReducer';
 import {combineReducers} from 'redux';
 
+import workTypeReducer from './workTypeReducer';
+import levelReducer from './levelReducer';
+import paperFormatReducer from './paperFormatReducer';
+
 const rootReducer = combineReducers({
-    workTypeReducer,
-    levelReducer
+    workType: workTypeReducer,
+    level: levelReducer,
+    paperFormat: paperFormatReducer
 });
 
 export default rootReducer;

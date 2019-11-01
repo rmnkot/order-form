@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PillButton from './../utils/PillButton';
 import {connect} from 'react-redux';
+import { setWorkType } from '../../../redux/actions/workTypeAction';
 
 class PillsGroup extends Component {
 
     render() {
-        const {data, handlePillsClick} = this.props;
+        const {data, setWorkType} = this.props;
 
         return (
             <div>
@@ -17,7 +18,7 @@ class PillsGroup extends Component {
                             name={data.name}
                             value={data.value}
                             params={item}
-                            handlePillsClick={handlePillsClick}
+                            handlePillsClick={setWorkType}
                         />
                     ))}
                 </div>
@@ -27,7 +28,11 @@ class PillsGroup extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    data: state.workTypeReducer.workType
+    data: state.workType
 });
 
-export default connect(mapStateToProps)(PillsGroup);
+const mapDispatchToProps = {
+    setWorkType
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PillsGroup);

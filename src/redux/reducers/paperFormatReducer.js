@@ -1,26 +1,26 @@
-import { FETCH_LEVEL, SET_LEVEL } from '../actions/actionTypes';
+import { FETCH_PAPER_FORMAT, SET_PAPER_FORMAT } from "../actions/actionTypes";
 
 const initialState = {
-    id: 'level',
-    name: 'level',
+    id: 'paperFormat',
+    name: 'paperFormat',
     value: '1',
     searchValue: '',
     searchDisabled: false,
     options: [],
     filteredOptions: '',
-    label: 'Academic Level',
+    label: 'Paper Format',
     dropdownOpen: false
 }
 
 export default function levelReducer(state = initialState, {type, payload}) {
     switch (type) {
-        case FETCH_LEVEL:
+        case FETCH_PAPER_FORMAT:
             return {
                 ...state,
                 options: payload
             };
 
-        // case SET_LEVEL:
+        // case SET_PAPER_FORMAT:
         //     return {
         //         ...state,
         //         value: payload
