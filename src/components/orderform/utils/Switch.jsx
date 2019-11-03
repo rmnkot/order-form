@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Switch({spacing, handleSpacing}) {
     return (
-        <label className="switch-label" htmlFor="spacing">
+        <label className="switch-label" htmlFor="spacing" data-test="switch-label">
             <span className={`switch-status ${(spacing === '1') ? 'disabled': ''}`} >Double Spaced</span>
 
             <input 
@@ -14,7 +14,7 @@ export default function Switch({spacing, handleSpacing}) {
                 onChange={handleSpacing}
             />
 
-            <span className="lever"></span>
+            <span className="lever" data-test="lever"></span>
 
             <span className={`switch-status ${(spacing === '2') ? 'disabled': ''}`} >Single Spaced</span>
         </label>
