@@ -19,6 +19,7 @@ class PillsGroup extends Component {
                             value={data.value}
                             params={item}
                             handlePillsClick={setWorkType}
+                            data-test="pill-button"
                         />
                     ))}
                 </div>
